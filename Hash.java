@@ -66,7 +66,7 @@ public class Hash {
 			System.out.println(e.getSigla());
 			System.out.println(e.getCep());			
 		}else{
-			System.out.println("Cep n„o encontrado!");
+			System.out.println("Cep n√£o encontrado!");
 		}
 	}
 	
@@ -99,18 +99,19 @@ public class Hash {
 			}
 		}
 		
-		double x = 0;
+		int total = 0;
 		int max = Collections.max(hash);
 		
 		for(int i = 0; i <= max; i++){
 			int freq = Collections.frequency(hash, i);
-			x += (i * freq);
+			total += (i * freq);
 			System.out.println("Existem "+ freq + " casas com "+ i +" elementos!");
 		}
+		
 		System.out.println("-----------------------------------------------------");
-		System.out.println("O n˙mero total de colisıes È de: " + colisoes);
+		System.out.println("O n√∫mero total de colis√µes √© de: " + colisoes);
 		double buscas = 0;
-		int total = 0;
+		
 		double somatorio = 0;
 		int fator = 0;
 		DecimalFormat df = new DecimalFormat("#0.0000000000");
@@ -121,15 +122,14 @@ public class Hash {
 				int casos = Collections.frequency(hash, j);
 				buscas+=casos;
 			}
-			double prob = (buscas/x);
-			total += buscas;
+			double prob = (buscas/total);
 			fator+=i;
 			somatorio += Collections.frequency(hash, i) * fator;
 			System.out.println("A probabilidade de achar o cep com "+ i + " passos e de : "+  df.format(prob));
 			buscas = 0;
 		}
 		System.out.println("-----------------------------------------------------");
-		double media = somatorio/x;		
-		System.out.println("A mÈdia de passos para se achar um cep È de :" + df.format(media) );
+		double media = somatorio/total;		
+		System.out.println("A m√©dia de passos para se achar um cep √© de :" + df.format(media) );
 	}	
 }
