@@ -175,4 +175,4 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
 	}	
 }	
 	```
-	Nesse trecho
+	Nesse trecho calculamos as probabilidade de achar o cep, a partir do número de passos e calculamos a média de passos que uma busca leva.
