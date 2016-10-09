@@ -78,28 +78,51 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
  * Com o arquivo de índice criado podemos fazer buscas neles e encontrar o registro completo no arquivo original para ver os seus dados. Pois a busca a partir desse índice baseado em uma função hash é muito mais rápido, como veremos daqui a pouco, a média de passos para achar um arquivo é de 1,76.
  	```java
 		public static void buscaHash(RandomAccessFile r, RandomAccessFile f, long cep, long n) throws Exception{
-		Elemento h = new Elemento();
-		long p = cep % n;
-		r.seek(p*24);
-		h.leCep(r);
-		while(h.getCep() != cep && h.getProximo() != -1){
-			r.seek(h.getProximo());
+			Elemento h = new Elemento();
+			long p = cep % n;
+			r.seek(p*24);
 			h.leCep(r);
+			while(h.getCep() != cep && h.getProximo() != -1){
+				r.seek(h.getProximo());
+				h.leCep(r);
+			}
+			if(h.getCep() == cep){
+				f.seek(h.getEndereco()*300);
+				Endereco e = new Endereco();
+				e.leEndereco(f);
+				System.out.println(e.getLogradouro());
+				System.out.println(e.getBairro());
+				System.out.println(e.getCidade());
+				System.out.println(e.getEstado());
+				System.out.println(e.getSigla());
+				System.out.println(e.getCep());			
+			}else{
+				System.out.println("Cep não encontrado!");
+			}
 		}
-		if(h.getCep() == cep){
-			f.seek(h.getEndereco()*300);
-			Endereco e = new Endereco();
-			e.leEndereco(f);
-			System.out.println(e.getLogradouro());
-			System.out.println(e.getBairro());
-			System.out.println(e.getCidade());
-			System.out.println(e.getEstado());
-			System.out.println(e.getSigla());
-			System.out.println(e.getCep());			
-		}else{
-			System.out.println("Cep não encontrado!");
-		}
-	}
 	```
-	Esse método recebe o cep desejado como parametro, aplica a função de hash nele e vai para a posição no arquivo índice. Com isso há a verificação se o cep lido é o procurado, se não for e houver colisões, avançamos pelo encadeamento até encontra-lo. Se o cep for encontrado nós lemos a coluna posicao e posicionamos a cabeça de leitura na posição recebida no arquivo original. Lemos a linha correspondente ao cep e exibimos na tela as informações sobre ele. Se o cep não for encontrado exibimos uma mensagem ao usuário. 
+	Esse método recebe o cep desejado como parametro, aplica a função de hash nele e vai para a posição no arquivo índice. Com isso há a verificação se o cep lido é o procurado, se não for e houver colisões, avançamos pelo encadeamento até encontra-lo. Se o cep for encontrado nós lemos a coluna posicao e posicionamos a cabeça de leitura na posição recebida no arquivo original. Lemos a linha correspondente ao cep e exibimos na tela as informações sobre ele. Se o cep não for encontrado exibimos uma mensagem ao usuário.
+	
+ * O último método presente na Classe Hash é usado para fornecer estatísticas sobre o arquivo índice gerado baseado na função hash.
+ 	```java
+		public static void estatisticasHash(RandomAccessFile r, long n) throws Exception{
+			System.out.println("-----------------------------------------------------");
+			Endereco e = new Endereco();
+			ArrayList<Integer> hash = new ArrayList<>();
+			for(int i = 0; i < n; i++){
+				hash.add(0);
+			}
+
+			int cep = 0;
+			int fHash = 0 ;
+
+			while(r.getFilePointer() < r.length()){
+				e.leEndereco(r);
+				cep = Integer.parseInt(e.getCep());
+				fHash = (int) (cep % n);
+				Integer novo = hash.get(fHash) + 1;
+				hash.set(fHash, novo);			
+			}
+	```
+	
  
