@@ -48,7 +48,7 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
 			h.leCep(r);
     ```
    
-   	 Com isso percorremos o arquivo cep.dat lendo os ceps, atraves da Classe Endereco. Depois de ler o cep é aplicado a função hash,  a qual é dada pelo resto da divisão do cep por 900001(valor fornecido pelo professor Renato). Movemos a cabeça de leitura para a posição corresposdente ao resultado da função, no arquivo índice e lemos o que há nessa posição.
+   	 Com isso percorremos o arquivo cep.dat lendo os ceps, atraves da Classe Endereco. Depois de ler o cep é aplicado a função hash,  a qual é dada pelo resto da divisão do cep por 900001 (valor fornecido pelo professor Renato). Movemos a cabeça de leitura para a posição corresposdente ao resultado da função, no arquivo índice e lemos o que há nessa posição.
  	```java
 		if(h.getCep() == -1){
 				h.setCep(Long.parseLong(e.getCep()));
