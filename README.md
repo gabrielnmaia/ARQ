@@ -17,10 +17,10 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
 
   * O arquivo Endereco.java, cedido pelo professor Renato, é utilizado na leitura do arquivo binário cep.dat.
 
-  * O arquivo Elemento.java é utilizado na leitura e na escrita do arquivo indice.
+  * O arquivo Elemento.java é utilizado na leitura e na escrita do arquivo índice.
   
   
-* O arquivo Hash.java contém os métodos da Classe Hash para a criação do indice baseada em uma função hash.
+* O arquivo Hash.java contém os métodos da Classe Hash para a criação do índice baseada em uma função hash.
   * O método abaixo cria um arquivo apartir da Classe Elemento, que tem como parametros: cep, endereco e proximo. O endereco é a posição do cep no arquivo cep.dat e o proximo e um ponteiro para o proximo Elemento, caso haja colisão.
   
 	```java
