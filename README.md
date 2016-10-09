@@ -20,16 +20,18 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
   * O arquivo Elemento.java é utilizado na leitura e na escrita do arquivo indice.
   
   
-* O arquivo Hash.cep contém os métodos para a criação do indice baseada em uma função hash.
+* O arquivo Hash.cep contém os métodos da Classe Hash para a criação do indice baseada em uma função hash.
   * O método abaixo cria um arquivo apartir da Classe Elemento, que tem como parametros: cep, endereco e proximo. O endereco é a posição do cep no arquivo cep.dat e o proximo e um ponteiro para o proximo Elemento, caso haja colisão.
   
-```java
-  public static void criaHash(RandomAccessFile f, long n) throws Exception{
-		Elemento h = new Elemento();
-		h.setCep(-1);
-		h.setEndereco(-1);
-		h.setProximo(-1);
-		for(int i = 0; i < n; i++){
-			h.escreveCep(f);				
+	```java
+	  public static void criaHash(RandomAccessFile f, long n) throws Exception{
+			Elemento h = new Elemento();
+			h.setCep(-1);
+			h.setEndereco(-1);
+			h.setProximo(-1);
+			for(int i = 0; i < n; i++){
+				h.escreveCep(f);				
+			}
 		}
-	}
+	```
+* Outro método presente na Classe Hash cria o índice, adicionando os ceps ao novo arquivo. 
