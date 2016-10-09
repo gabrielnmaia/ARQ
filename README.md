@@ -49,7 +49,7 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
     ```
    
    	 Com isso percorremos o arquivo cep.dat lendo os ceps, atraves da Classe Endereco. Depois de ler o cep é aplicado a função hash,  a qual é dada pelo resto da divisão do cep por 900001(valor fornecido pelo professor Renato). Movemos a cabeça de leitura para a posição corresposdente ao resultado da função, no arquivo índice e lemos o que há nessa posição.
-  ```java
+ 	```java
 		if(h.getCep() == -1){
 				h.setCep(Long.parseLong(e.getCep()));
 				h.setEndereco(i);
@@ -58,3 +58,19 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
 				h.escreveCep(r);				
 			}
 	```
+	Dentro do While há um if, que se nessa posição do arquivo índice o cep for igual a -1 nós setamos os atributos de um objeto Elemento. Cep, como o cep oriundo do arquivo cep.dat. A posição damos o número do registro daquele cep no aquivo original, pois há uma leitura sequencial do arquivo. Enquanto lemos guardamos a posição em uma variável, que incrementa uma unidade ao final de cada passagem pelo While. Retornamos a cabeça de leitura a posição inical do registro, pois ao lermos um registro a cabeça de leitura estará no registro seguinte, e escrevemos no arquivo com o auxílio da Classe Elemento.
+	```java
+		else{
+				long prox = h.getProximo();
+				h.setProximo(r.length());
+				r.seek(p*24);
+				h.escreveCep(r);
+				r.seek(r.length());
+				h.setCep(Long.parseLong(e.getCep()));
+				h.setEndereco(i);
+				h.setProximo(prox);
+				h.escreveCep(r);				
+			}i++;		
+		}
+	```
+	Se a condição do if não for satisfeita
