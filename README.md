@@ -124,5 +124,55 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
 				hash.set(fHash, novo);			
 			}
 	```
-	
- 
+	Nós criamos um ArrayList para emular o arquivo índice e o preenchemos com zeros. Após isso lemos o arquivo cep.dat e aplicamos a função hash sobre o cep e incrementamos 1 na posição correpondente.
+	```java
+		int colisoes = 0;
+		
+		for(int i = 0; i < hash.size();i++){
+			int proc  = hash.get(i);
+			if(proc>1){
+				int aux = proc -1;
+				colisoes+=aux;
+			}
+		}
+		
+		System.out.println("-----------------------------------------------------");
+		System.out.println("O número total de colisões é de: " + colisoes);
+		System.out.println("-----------------------------------------------------");
+		
+		int total = 0;
+		int max = Collections.max(hash);
+		
+		for(int i = 0; i <= max; i++){
+			int freq = Collections.frequency(hash, i);
+			total += (i * freq);
+			System.out.println("Existem "+ freq + " campos com "+ i +" elementos!");
+		}
+	```
+ 	Com o ArrayList pronto começamos a reunir informações sobre ele. A primeira é o número de colisões que ocorrem utilizando essa função. Outro dado é quantas vezes cada numero de colisão ocorre, nele utlizamos métodos de Collections para determinar o maior número que aparece (Collection.max()) e para vermos a quantidade de vezes que um número se repete (Collections.frequency()).
+	```java
+		double buscas = 0;
+		
+		double somatorio = 0;
+		int fator = 0;
+		DecimalFormat df = new DecimalFormat("#0.0000000000");
+		System.out.println("-----------------------------------------------------");
+		
+		for(int i = 1; i <= max; i++){
+			for(int j = i; j <= max; j++){
+				int casos = Collections.frequency(hash, j);
+				buscas+=casos;
+			}
+			double prob = (buscas/total);
+			fator+=i;
+			somatorio += Collections.frequency(hash, i) * fator;
+			System.out.println("A probabilidade de achar o cep com "+ i + " passos e de : "+  df.format(prob));
+			buscas = 0;
+		}
+		System.out.println("-----------------------------------------------------");
+		double media = somatorio/total;		
+		System.out.println("A média de passos para se achar um cep é de :" + df.format(media) );
+	}	
+}	
+	```
+	Nesse trecho
