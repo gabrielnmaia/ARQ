@@ -109,7 +109,7 @@ public class Hash {
 		for(int i = 0; i <= max; i++){
 			int freq = Collections.frequency(hash, i);
 			total += (i * freq);
-			System.out.println("Existem "+ freq + " casas com "+ i +" elementos!");
+			System.out.println("Existem "+ freq + " campos com "+ i +" elementos!");
 		}
 				
 		double buscas = 0;
