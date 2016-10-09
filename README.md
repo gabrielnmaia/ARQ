@@ -35,16 +35,26 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
 		}
 	```
  * Outro método presente na Classe Hash cria o índice, adicionando os ceps ao novo arquivo.
-	  ```java
-		public static void criaIndice(RandomAccessFile f, RandomAccessFile r, long n) throws Exception{
-			long i = 0;
-			long p = 0;
-			Elemento h = new Elemento();
-			Endereco e = new Endereco();
-			while(f.getFilePointer() < f.length()){
-				e.leEndereco(f);
-				p = Long.parseLong(e.getCep()) % n;
+    ```java
+    	public static void criaIndice(RandomAccessFile f, RandomAccessFile r, long n) throws Exception{
+		long i = 0;
+		long p = 0;
+		Elemento h = new Elemento();
+		Endereco e = new Endereco();
+		while(f.getFilePointer() < f.length()){
+			e.leEndereco(f);
+			p = Long.parseLong(e.getCep()) % n;
+			r.seek(p*24);
+			h.leCep(r);
+    ```
+   
+   	 Com isso percorremos o arquivo cep.dat lendo os ceps, atraves da Classe Endereco. Depois de ler o cep é aplicado a função hash,  a qual é dada pelo resto da divisão do cep por 900001(valor fornecido pelo professor Renato). Movemos a cabeça de leitura para a posição corresposdente ao resultado da função, no arquivo índice e lemos o que há nessa posição.
+  ```java
+		if(h.getCep() == -1){
+				h.setCep(Long.parseLong(e.getCep()));
+				h.setEndereco(i);
+				h.setProximo(-1);
 				r.seek(p*24);
-				h.leCep(r);
-		```
-	  Com isso percorremos o arquivo cep.dat lendo os ceps, atraves da Classe Endereco. Depois de ler o cep é aplicado a função hash,  a qual é dada pelo resto da divisão do cep por 900001(valor fornecido pelo professor Renato).
+				h.escreveCep(r);				
+			}
+	```
