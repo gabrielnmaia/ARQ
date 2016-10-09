@@ -74,3 +74,32 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
 		}
 	```
 	Se a condição do if não for satisfeita é porque há um registro escrito nessa posição, portanto temos uma colisão. Com isso começamos o tratamento dessa colisão criando uma variável prox, que armazena o campo proximo escrito nesse regisrto do arquivo. Alteramos apenas o atributo proximo do registro lido como o final do arquivo e o reescrevemos. Depois disso movemos a cabeça de leitura para o final do arquivo e escrevemos o registro do aqruivo original. Após isso como já dito a cima há o incremento da variável de controle de registros e o loop continua até chegar ao fim do arquivo cep.dat.
+ 
+ * Com o arquivo de índice criado podemos fazer buscas neles e encontrar o registro completo no arquivo original para ver os seus dados. Pois a busca a partir desse índice baseado em uma função hash é muito mais rápido, como veremos daqui a pouco, a média de passos para achar um arquivo é de 1,76.
+ 	```java
+		public static void buscaHash(RandomAccessFile r, RandomAccessFile f, long cep, long n) throws Exception{
+		Elemento h = new Elemento();
+		long p = cep % n;
+		r.seek(p*24);
+		h.leCep(r);
+		while(h.getCep() != cep && h.getProximo() != -1){
+			r.seek(h.getProximo());
+			h.leCep(r);
+		}
+		if(h.getCep() == cep){
+			f.seek(h.getEndereco()*300);
+			Endereco e = new Endereco();
+			e.leEndereco(f);
+			System.out.println(e.getLogradouro());
+			System.out.println(e.getBairro());
+			System.out.println(e.getCidade());
+			System.out.println(e.getEstado());
+			System.out.println(e.getSigla());
+			System.out.println(e.getCep());			
+		}else{
+			System.out.println("Cep não encontrado!");
+		}
+	}
+	```
+	Esse método recebe o cep desejado como parametro, aplica a função de hash nele e vai para a posição no arquivo índice. Com isso há a verificação se o cep lido é o procurado, se não for e houver colisões, avançamos pelo encadeamento até encontra-lo. Se o cep for encontrado nós lemos a coluna posicao e posicionamos a cabeça de leitura na posição recebida no arquivo original. Lemos a linha correspondente ao cep e exibimos na tela as informações sobre ele. Se o cep não for encontrado exibimos uma mensagem ao usuário. 
+ 
