@@ -34,4 +34,17 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
 			}
 		}
 	```
-* Outro método presente na Classe Hash cria o índice, adicionando os ceps ao novo arquivo. 
+ * Outro método presente na Classe Hash cria o índice, adicionando os ceps ao novo arquivo.
+	  ```java
+		public static void criaIndice(RandomAccessFile f, RandomAccessFile r, long n) throws Exception{
+			long i = 0;
+			long p = 0;
+			Elemento h = new Elemento();
+			Endereco e = new Endereco();
+			while(f.getFilePointer() < f.length()){
+				e.leEndereco(f);
+				p = Long.parseLong(e.getCep()) % n;
+				r.seek(p*24);
+				h.leCep(r);
+		```
+	  Com isso percorremos o arquivo cep.dat lendo os ceps, atraves da Classe Endereco. Depois de ler o cep é aplicado a função hash,  a qual é dada pelo resto da divisão do cep por 900001(valor fornecido pelo professor Renato).
