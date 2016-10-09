@@ -99,6 +99,10 @@ public class Hash {
 			}
 		}
 		
+		System.out.println("-----------------------------------------------------");
+		System.out.println("O número total de colisões é de: " + colisoes);
+		System.out.println("-----------------------------------------------------");
+		
 		int total = 0;
 		int max = Collections.max(hash);
 		
@@ -107,9 +111,7 @@ public class Hash {
 			total += (i * freq);
 			System.out.println("Existem "+ freq + " casas com "+ i +" elementos!");
 		}
-		
-		System.out.println("-----------------------------------------------------");
-		System.out.println("O número total de colisões é de: " + colisoes);
+				
 		double buscas = 0;
 		
 		double somatorio = 0;
