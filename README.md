@@ -2,7 +2,7 @@
 
 Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado em Ciência da Computação no CEFET/RJ, ministrada pelo professor Renato Mauro.
 
-##O Trabalho
+## O Trabalho
 
 * O trabalho consiste na criação de um índice, gerado a partir de uma função hash, para o a arquivo cep.dat, cedido pelo professor Renato. 
 * Após a criação do índice devemos efetuar buscas de ceps nele e exibirmos os dados completos daquele cep, oriundos do arquivo original.
@@ -11,7 +11,7 @@ Trabalho para a matéria Organização de Estrutura de Arquivos do Bacharelado e
     * Média de passos para achar um cep
     * Probabilidades
 
-##Código
+## Código
 
 * O Programa é divido em 4 arquivos, sendo 2 deles para auxílio na leitura e escrita dos arquivos.
 
